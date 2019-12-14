@@ -24,13 +24,14 @@ namespace Galaga
         private GraphicsDevice device;
         private ContentManager Content;
 
+
         public Projectile(Rectangle shooter, int type, Vector2 temporaryVel, int rot, GraphicsDevice tempDevice, ContentManager tempContent)
         {
             missileType = type;
             velocityVector = temporaryVel;
             device = tempDevice;
             Content = tempContent;
-            rec = new Rectangle(shooter.Center.X - 7, shooter.Top - (type * 5), 10,30);
+            rec = new Rectangle(shooter.Center.X, shooter.Top - (type * 5), 10,30);
             positionVector.X = rec.X;
             positionVector.Y = rec.Y;
             rotation = rot;

@@ -14,12 +14,18 @@ namespace Galaga
 {
     class Player
     {
-        //560 width 720 height
+        //580 width 720 height
         //player 50x50
+
         private Rectangle player;
+        public int lives;
+        public int bullets;
+
         public Player()
         {
-            player = new Rectangle(230, 670, 50, 50);
+            player = new Rectangle(230, 595, 50, 50);
+            lives = 3;
+            bullets = 2;
         }
 
         public Rectangle getRectangle()
@@ -29,11 +35,17 @@ namespace Galaga
 
         public void moveRight()
         {
-            player.X++;
+            if (player.X < 530)
+            {
+                player.X += 4;
+            }
         }
         public void moveLeft()
         {
-            player.X--;
+            if (player.X > 0)
+            {
+                player.X -= 4;
+            }
         }
     }
 }

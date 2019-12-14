@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\eMissile.xnb</Output>
-      <Time>2019-12-12T22:14:14.8309471-06:00</Time>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\eMissile.xnb</Output>
+      <Time>2019-12-12T22:54:02-06:00</Time>
     </Item>
     <Item>
       <Source>pMissile.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\pMissile.xnb</Output>
-      <Time>2019-12-12T22:14:14.842915-06:00</Time>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\pMissile.xnb</Output>
+      <Time>2019-12-12T22:54:02-06:00</Time>
     </Item>
     <Item>
       <Source>pShip.png</Source>
@@ -25,8 +25,80 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\pShip.xnb</Output>
-      <Time>2019-12-12T22:48:15.961419-06:00</Time>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\pShip.xnb</Output>
+      <Time>2019-12-12T22:54:02-06:00</Time>
+    </Item>
+    <Item>
+      <Source>White Circle.png</Source>
+      <Name>White Circle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\White Circle.xnb</Output>
+      <Time>2019-12-12T23:05:40-06:00</Time>
+    </Item>
+    <Item>
+      <Source>White.png</Source>
+      <Name>White</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\White.xnb</Output>
+      <Time>2019-12-12T23:05:40-06:00</Time>
+    </Item>
+    <Item>
+      <Source>GalagaLogo.png</Source>
+      <Name>GalagaLogo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaLogo.xnb</Output>
+      <Time>2019-12-12T23:38:44-06:00</Time>
+    </Item>
+    <Item>
+      <Source>copyright-128.png</Source>
+      <Name>copyright-128</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\copyright-128.xnb</Output>
+      <Time>2019-12-13T01:14:12-06:00</Time>
+    </Item>
+    <Item>
+      <Source>GalagaEnemy1.png</Source>
+      <Name>GalagaEnemy1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaEnemy1.xnb</Output>
+      <Time>2019-12-13T02:32:46-06:00</Time>
+    </Item>
+    <Item>
+      <Source>GalagaEnemy2.png</Source>
+      <Name>GalagaEnemy2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaEnemy2.xnb</Output>
+      <Time>2019-12-13T02:32:46-06:00</Time>
+    </Item>
+    <Item>
+      <Source>ArialBigSpriteFont.spritefont</Source>
+      <Name>ArialBigSpriteFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\ArialBigSpriteFont.xnb</Output>
+      <Time>2019-12-13T00:45:06-06:00</Time>
+    </Item>
+    <Item>
+      <Source>ArialSmallSpriteFont.spritefont</Source>
+      <Name>ArialSmallSpriteFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\ArialSmallSpriteFont.xnb</Output>
+      <Time>2019-12-13T00:51:50-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -35,10 +107,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\GalagaContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Dylan\Downloads\Galaga\Galaga\GalagaContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -67,7 +139,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2019-09-23T12:34:40.7138255-05:00</Value>
+        <Value>2019-09-26T17:40:32.9916562-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
