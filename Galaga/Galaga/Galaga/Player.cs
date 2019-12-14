@@ -28,7 +28,7 @@ namespace Galaga
         public Player()
         {
             player = new Rectangle(265, 595, 50, 50);
-            lives = 1;
+            lives = 3;
             bullets = 2;
             score = 0;
             highScore = 0;

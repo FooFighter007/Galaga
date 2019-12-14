@@ -1,4 +1,0 @@
-C:\Users\Emile\Desktop\VGP\Galaga\Galaga\GalagaContent\obj\x86\Debug\GalagaContent.contentprojResolveAssemblyReference.cache
-C:\Users\ciara\Desktop\Galaga\Galaga\GalagaContent\obj\x86\Debug\GalagaContent.contentprojResolveAssemblyReference.cache
-C:\Users\ciara\Desktop\Schoolwork\Video Game Programming\Galaga\Galaga\GalagaContent\obj\x86\Debug\GalagaContent.contentprojResolveAssemblyReference.cache
-C:\Users\Dylan\Downloads\Galaga\Galaga\GalagaContent\obj\x86\Debug\GalagaContent.contentprojResolveAssemblyReference.cache
