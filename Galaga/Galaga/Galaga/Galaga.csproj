@@ -57,6 +57,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameOverlay.cs" />
     <Compile Include="GameOverScreen.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Player.cs" />

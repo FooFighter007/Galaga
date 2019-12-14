@@ -9,3 +9,4 @@ Content\GalagaEnemy1.xnb
 Content\GalagaEnemy2.xnb
 Content\ArialBigSpriteFont.xnb
 Content\ArialSmallSpriteFont.xnb
+Content\ClassicLarge.xnb

@@ -92,3 +92,12 @@ C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\obj\x86\Debug\Galaga.csprojResolve
 C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\obj\x86\Debug\Galaga.exe
 C:\Users\Dylan\Downloads\Galaga\Galaga\Galaga\obj\x86\Debug\Galaga.pdb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\White Circle.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\White.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaLogo.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\copyright-128.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaEnemy1.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\GalagaEnemy2.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\ArialBigSpriteFont.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\ArialSmallSpriteFont.xnb
+C:\Users\Emile\Desktop\VGP\Galaga\Galaga\Galaga\bin\x86\Debug\Content\ClassicLarge.xnb

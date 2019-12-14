@@ -43,31 +43,18 @@ namespace Galaga
 
         public void LoadContent()
         {
-            GameFont = Content.Load<SpriteFont>("ArialSmallSpriteFont");
-        }
-
-
-        public void UnloadContent()
-        {
-            
-        }
-
-        public void Update()
-        {
-            KeyboardState kb = Keyboard.GetState();
-
-            if (kb.IsKeyDown(Keys.Space))
-            {
-                //reset
-            }
+            GameFont = Content.Load<SpriteFont>("ClassicLarge");
         }
 
        public void Draw()
         {
-            spriteBatch.DrawString(GameFont,"---RESULTS---",new Vector2(220,280),Color.Red);
-            spriteBatch.DrawString(GameFont, "SHOTS FIRED:" + shots + "\nNUMBER OF HITS:" + hits, new Vector2(190, 320), Color.Yellow);
-            spriteBatch.DrawString(GameFont, "HIT MISS RATIO:%"+(shots/100*hits), new Vector2(190, 380), Color.White);
-            spriteBatch.DrawString(GameFont, "PRESS SPACE TO RESTART", new Vector2(100, 680), Color.White);
+            spriteBatch.DrawString(GameFont,"---RESULTS---",new Vector2(200,280),Color.Red);
+            spriteBatch.DrawString(GameFont, "SHOTS  FIRED:  " + shots + "\nNUMBER  OF  HITS:  " + hits, new Vector2(170, 320), Color.Yellow);
+            double ratio = 0;
+            if (hits > 0)
+                ratio = (double) shots / hits;
+            spriteBatch.DrawString(GameFont, "HIT  MISS  RATIO:  " + ratio + "%", new Vector2(170, 380), Color.White);
+            spriteBatch.DrawString(GameFont, "PRESS  SPACE  TO  RESTART", new Vector2(140, 680), Color.White);
         }
     }
 }

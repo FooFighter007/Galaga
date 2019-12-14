@@ -28,17 +28,12 @@ namespace Galaga
         StarBackground starBackgroundObject;
         MainMenu mainMenuObject;
 
-        Rectangle[] lives;
-
         public int currentMenu;
 
         Boolean menuChangeOnFrame;
 
         GameOverScreen GAMEOVER;
-        private int hits;
-        private int shots;
-
-        public int Score;
+        GameOverlay gOverlay;
 
         long timer;
 
@@ -66,14 +61,6 @@ namespace Galaga
             currentMenu = 0;
             menuChangeOnFrame = false;
             timer = 0;
-            hits = 0;
-            shots = 0;
-
-            lives = new Rectangle[]
-            {
-                new Rectangle(25,680,35,35),
-                new Rectangle(65,680,35,35)
-            };
 
             base.Initialize();
         }
@@ -92,7 +79,9 @@ namespace Galaga
             starBackgroundObject.Initialize();
             starBackgroundObject.LoadContent();
             mainMenuObject = new MainMenu(spriteBatch, GraphicsDevice, Content);
-            GAMEOVER = new GameOverScreen(spriteBatch, GraphicsDevice, Content, shots, hits);
+            GAMEOVER = new GameOverScreen(spriteBatch, GraphicsDevice, Content, player.shots, player.hits);
+            gOverlay = new GameOverlay(this, spriteBatch, ref player);
+            gOverlay.LoadContent(Content);
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
         }
@@ -152,11 +141,8 @@ namespace Galaga
                     {
                         player.bullets++;
                     }
+                    player.addScore(25);
                     timer = 0;
-                }
-                if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
-                {
-                    currentMenu = 0;
                 }
 
                 if (kb.IsKeyDown(Keys.A) && menuChangeOnFrame == false)
@@ -181,6 +167,9 @@ namespace Galaga
                 {
                     currentMenu = 2;
                 }
+            } else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
+            {
+                currentMenu = 0;
             }
 
             if (starBackgroundObject.starBackgroundDisplayed == true)
@@ -225,19 +214,18 @@ namespace Galaga
                     bullets[i].Draw(spriteBatch);
                 }
 
-                for (int i = 0; i < player.lives - 1; i++)
-                {
-                    spriteBatch.Draw(ship, lives[i], Color.White);
-                }
-
                 spriteBatch.Draw(ship, player.getRectangle(), Color.White);
-                
             }
+
+            if (currentMenu != 0)
+                gOverlay.Render();
+
             if (currentMenu == 2)
             {
                 GAMEOVER.Draw();
             }
-                spriteBatch.End();
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
