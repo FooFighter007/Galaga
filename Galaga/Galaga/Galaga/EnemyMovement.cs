@@ -47,7 +47,7 @@ namespace Galaga
         //Lists of Slots and Enemies
         private Rectangle[] spots = new Rectangle[27];
         public int[] spotIndex = new int[27];
-        private List<Enemy> enemies = new List<Enemy>();
+        public List<Enemy> enemies = new List<Enemy>();
         Random rand = new Random();
         
         //Construtor

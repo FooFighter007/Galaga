@@ -42,6 +42,8 @@ namespace Galaga
         int slotId;
         int dir;
 
+        int health;
+
         //Construtor
         public Enemy()
         {
@@ -51,6 +53,8 @@ namespace Galaga
             isEntering = false;
             inFormation = false;
             enteringForm = false;
+
+            health = 1;
         }
 
         //Called to Move enemy into game
@@ -69,6 +73,12 @@ namespace Galaga
         public void Hit()
         {
             hit = Color.Red;
+            health--;
+
+            if (health == 0)
+            {
+                em.enemies.Remove(this);
+            }
         }
 
         public void Dive()
@@ -77,17 +87,18 @@ namespace Galaga
             inFormation = false;
             isDiving = true;
             if(dir == 0)
-                diveRect = new Rectangle(enemyPos.X - speed / 2, 740, speed, speed);
+                diveRect = new Rectangle(enemyPos.X - speed / 2, 760, speed, speed);
             if (dir == 1)
-                diveRect = new Rectangle((enemyPos.X + 100) - speed / 2, 740, speed, speed);
+                diveRect = new Rectangle((enemyPos.X + 100) - speed / 2, 760, speed, speed);
             if (dir == 2)
-                diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 740, speed, speed);
+                diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 760, speed, speed);
         }
 
         //Main Enemy Update Method
         public void update()
         {
             //When Enemy Entering Play
+
             if (isEntering == true)
             {
                 Vector2 slope = new Vector2((enemyPos.X - activePath.pathPoints[step + 1].X), (enemyPos.Y - activePath.pathPoints[step + 1].Y));
@@ -160,6 +171,14 @@ namespace Galaga
 
                 enemyPos.X = (int)x1;
                 enemyPos.Y = (int)y1;
+
+                if (enemyPos.Y > 720)
+                {
+                    enemyPos.Y = -20;
+                    y1 = -20;
+                    isDiving = false;
+                    enteringForm = true;
+                }
             }
 
             //Moves Via Global Offset
