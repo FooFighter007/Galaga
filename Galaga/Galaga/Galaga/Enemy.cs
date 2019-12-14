@@ -28,7 +28,7 @@ namespace Galaga
         bool isDiving;
         bool isHit;
         bool isEntering;
-        bool inFormation;
+        public bool inFormation;
         bool enteringForm;
 
         //Postion Floats
@@ -74,13 +74,14 @@ namespace Galaga
         public void Dive()
         {
             dir = rand.Next(0,3);
+            inFormation = false;
             isDiving = true;
             if(dir == 0)
-                diveRect = new Rectangle();
-            if (dir == 0)
-                diveRect = new Rectangle();
-            if (dir == 0)
-                diveRect = new Rectangle();
+                diveRect = new Rectangle(enemyPos.X - speed / 2, 740, speed, speed);
+            if (dir == 1)
+                diveRect = new Rectangle((enemyPos.X + 100) - speed / 2, 740, speed, speed);
+            if (dir == 2)
+                diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 740, speed, speed);
         }
 
         //Main Enemy Update Method
@@ -149,7 +150,16 @@ namespace Galaga
 
             if (isDiving == true)
             {
+                Vector2 slope = new Vector2((enemyPos.X - diveRect.X), (enemyPos.Y - diveRect.Y));
+                slope.Normalize();
 
+                x1 -= slope.X * speed;
+                y1 -= slope.Y * speed;
+
+                rotate = (float)Math.Atan2(slope.Y, slope.X) + MathHelper.ToRadians(-90);
+
+                enemyPos.X = (int)x1;
+                enemyPos.Y = (int)y1;
             }
 
             //Moves Via Global Offset

@@ -35,6 +35,8 @@ namespace Galaga
         public int currentMenu;
         public int maxEnemiesPerRound;
         public int maxSpeed;
+        public int diveFreq;
+        public int diveChance;
 
         int chance;
 
@@ -44,7 +46,8 @@ namespace Galaga
         GameOverlay gOverlay;
 
         long timer;
-        double enemyTimer;
+        double spawnTimer;
+        double diveTimer;
 
         public Game1()
         {
@@ -71,7 +74,8 @@ namespace Galaga
             currentMenu = 0;
             menuChangeOnFrame = false;
             timer = 0;
-            enemyTimer = 0;
+            spawnTimer = 0;
+            diveTimer = 0;
 
             base.Initialize();
         }
@@ -134,6 +138,8 @@ namespace Galaga
                     //Difficulty Changes
                     maxEnemiesPerRound = 14;
                     maxSpeed = 5;
+                    diveFreq = 90;
+                    diveChance = 2; 
                 }
             }
 
@@ -187,18 +193,26 @@ namespace Galaga
 
 
                 //Random Enemies Entering
-                if(enemyTimer == 180)
+                if(spawnTimer == 180)
                 {
                     chance = rand.Next(0,2);
                     if(chance == 0)
                         em.RandomAddEnemy(maxEnemiesPerRound, maxSpeed);
-                    enemyTimer = 0;
+                    spawnTimer = 0;
                 }
 
-
+                if (diveTimer == diveFreq)
+                {
+                    if (rand.Next(0, diveChance + 1) == 0)
+                    {
+                        em.RandomDive();
+                    }
+                    diveTimer = 0;
+                }
 
                 //Updates Enemy Spawn Timer
-                enemyTimer++;
+                spawnTimer++;
+                diveTimer++;
                 //Updates EnemyMovement
                 em.update();
 

@@ -18,11 +18,14 @@ namespace Galaga
         public Texture2D enemy1;
         public Texture2D enemy2;
 
+        Texture2D current;
+
         Path activePath;
         bool isAdding;
 
         //Temporary Enemy
         Enemy tempenem;
+        Enemy tempDive;
 
         //Global Offset
         public int offset = 0;
@@ -167,6 +170,36 @@ namespace Galaga
         }
 
 
+        //Gets Filled Slots, Chooses Enemy
+        public void RandomDive()
+        {
+            bool isPossible = false;
+            int slotId;
+            List<Enemy> e = new List<Enemy>();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].inFormation == true)
+                {
+                    isPossible = true;
+                }
+            }
+
+            if (isPossible == true)
+            {
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].inFormation == true)
+                    {
+                        e.Add(enemies[i]);
+                    }
+                }
+                slotId = rand.Next(0, e.Count);
+
+                e[slotId].Dive();
+
+            }
+        }
+
 
 
         //Returns Array Of Open Enemy Slots
@@ -182,6 +215,21 @@ namespace Galaga
             }
             return rects;
         }
+
+        //Returns Array Of Enemy Filled Spots
+        public Rectangle[] GetClosedSpots()
+        {
+            Rectangle[] rects = new Rectangle[27];
+            for (int i = 0; i <= 26; i++)
+            {
+                if (spotIndex[i] != 0)
+                {
+                    rects[i] = spots[i];
+                }
+            }
+            return rects;
+        }
+
 
 
         //Adds New Enemy
@@ -201,9 +249,15 @@ namespace Galaga
             offset += 1 * direction;
 
             if (offset < -20)
+            {
                 direction = 1;
+                current = enemy1;
+            }
             if (offset > 20)
+            {
                 direction = -1;
+                current = enemy2;
+            }
 
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -232,7 +286,7 @@ namespace Galaga
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                sb.Draw(enemy1, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
+                sb.Draw(current, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
             }
         }
 
