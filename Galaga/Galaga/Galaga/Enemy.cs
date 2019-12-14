@@ -24,12 +24,16 @@ namespace Galaga
         Rectangle choosen;
         Rectangle diveRect;
 
+        //timer
+        double timer;
+
         //Condition Bools
         bool isDiving;
         bool isHit;
         bool isEntering;
         public bool inFormation;
         bool enteringForm;
+        bool hasShot;
 
         //Postion Floats
         float x1;
@@ -41,7 +45,7 @@ namespace Galaga
         int speed;
         int slotId;
         int dir;
-
+        int randShoot;
         int health;
 
         //Construtor
@@ -53,6 +57,7 @@ namespace Galaga
             isEntering = false;
             inFormation = false;
             enteringForm = false;
+            hasShot = false;
 
             health = 1;
         }
@@ -92,6 +97,8 @@ namespace Galaga
                 diveRect = new Rectangle((enemyPos.X + 100) - speed / 2, 760, speed, speed);
             if (dir == 2)
                 diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 760, speed, speed);
+            timer = 0;
+            randShoot = rand.Next(30, 91);
         }
 
         //Main Enemy Update Method
@@ -159,6 +166,7 @@ namespace Galaga
                 }
             }
 
+            //Runs When Diving
             if (isDiving == true)
             {
                 Vector2 slope = new Vector2((enemyPos.X - diveRect.X), (enemyPos.Y - diveRect.Y));
@@ -172,13 +180,24 @@ namespace Galaga
                 enemyPos.X = (int)x1;
                 enemyPos.Y = (int)y1;
 
+
+                //!!FOR CIARAN!!
+                if (timer == randShoot && hasShot == false)
+                {
+                    Console.WriteLine("Test");
+                    hasShot = true;
+                }
+
+                //Exits Dive
                 if (enemyPos.Y > 720)
                 {
-                    enemyPos.Y = -20;
-                    y1 = -20;
+                    enemyPos.Y = -40;
+                    y1 = -40;
                     isDiving = false;
                     enteringForm = true;
+                    hasShot = false;
                 }
+                timer++;
             }
 
             //Moves Via Global Offset
