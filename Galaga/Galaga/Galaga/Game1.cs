@@ -22,13 +22,21 @@ namespace Galaga
         Texture2D ship;
         Player player;
 
+        Random rand = new Random();
+
         List<Projectile> bullets;
         KeyboardState kbOld;
 
         StarBackground starBackgroundObject;
         MainMenu mainMenuObject;
 
+        EnemyMovement em;
+
         public int currentMenu;
+        public int maxEnemiesPerRound;
+        public int maxSpeed;
+
+        int chance;
 
         Boolean menuChangeOnFrame;
 
@@ -36,6 +44,7 @@ namespace Galaga
         GameOverlay gOverlay;
 
         long timer;
+        double enemyTimer;
 
         public Game1()
         {
@@ -55,12 +64,14 @@ namespace Galaga
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            em = new EnemyMovement();
             player = new Player();
             bullets = new List<Projectile>();
             kbOld = Keyboard.GetState();
             currentMenu = 0;
             menuChangeOnFrame = false;
             timer = 0;
+            enemyTimer = 0;
 
             base.Initialize();
         }
@@ -82,6 +93,8 @@ namespace Galaga
             GAMEOVER = new GameOverScreen(spriteBatch, GraphicsDevice, Content, player.shots, player.hits);
             gOverlay = new GameOverlay(this, spriteBatch, ref player);
             gOverlay.LoadContent(Content);
+            em.enemy1 = Content.Load<Texture2D>("GalagaEnemy1");
+            em.enemy2 = Content.Load<Texture2D>("GalagaEnemy2");
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
         }
@@ -117,6 +130,10 @@ namespace Galaga
                 {
                     currentMenu = 1;
                     menuChangeOnFrame = true;
+
+                    //Difficulty Changes
+                    maxEnemiesPerRound = 14;
+                    maxSpeed = 5;
                 }
             }
 
@@ -167,6 +184,25 @@ namespace Galaga
                 {
                     currentMenu = 2;
                 }
+
+
+                //Random Enemies Entering
+                if(enemyTimer == 180)
+                {
+                    chance = rand.Next(0,2);
+                    if(chance == 0)
+                        em.RandomAddEnemy(maxEnemiesPerRound, maxSpeed);
+                    enemyTimer = 0;
+                }
+
+
+
+                //Updates Enemy Spawn Timer
+                enemyTimer++;
+                //Updates EnemyMovement
+                em.update();
+
+
             } else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
             {
                 currentMenu = 0;
@@ -215,6 +251,7 @@ namespace Galaga
                 }
 
                 spriteBatch.Draw(ship, player.getRectangle(), Color.White);
+                em.draw(spriteBatch);
             }
 
             if (currentMenu != 0)

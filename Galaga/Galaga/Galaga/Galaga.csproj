@@ -57,9 +57,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyMovement.cs" />
     <Compile Include="GameOverlay.cs" />
     <Compile Include="GameOverScreen.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
