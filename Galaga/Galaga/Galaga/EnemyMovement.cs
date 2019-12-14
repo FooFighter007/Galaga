@@ -14,6 +14,8 @@ namespace Galaga
 {
     class EnemyMovement : Microsoft.Xna.Framework.Game
     {
+        Game1 game;
+
         //Textures
         public Texture2D enemy1;
         public Texture2D enemy2;
@@ -51,11 +53,12 @@ namespace Galaga
         Random rand = new Random();
         
         //Construtor
-        public EnemyMovement()
+        public EnemyMovement(Game1 g)
         {
             isAdding = false;
             CreatePaths();
             CreateTable();
+            game = g;
         }
 
         //Creates Top Slots
@@ -235,7 +238,7 @@ namespace Galaga
         //Adds New Enemy
         public void addEnemy(Path ap, int s)
         {
-            tempenem = new Enemy();
+            tempenem = new Enemy(game);
             tempenem.EnemyEnter(s, ap);
             tempenem.em = this;
             enemies.Add(tempenem);

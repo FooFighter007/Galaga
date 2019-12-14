@@ -23,6 +23,7 @@ namespace Galaga
         Random rand = new Random();
         Rectangle choosen;
         Rectangle diveRect;
+        Game1 game;
 
         //timer
         double timer;
@@ -49,7 +50,7 @@ namespace Galaga
         int health;
 
         //Construtor
-        public Enemy()
+        public Enemy(Game1 g)
         {
             hit = Color.White;
             isDiving = false;
@@ -58,6 +59,8 @@ namespace Galaga
             inFormation = false;
             enteringForm = false;
             hasShot = false;
+
+            game = g;
 
             health = 1;
         }

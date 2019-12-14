@@ -67,7 +67,7 @@ namespace Galaga
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            em = new EnemyMovement();
+            em = new EnemyMovement(this);
             player = new Player();
             bullets = new List<Projectile>();
             kbOld = Keyboard.GetState();
