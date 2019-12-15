@@ -188,9 +188,9 @@ namespace Galaga
                 //!!FOR CIARAN!!
                 if (timer == randShoot && hasShot == false)
                 {
-                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(0, 7), 180, game.Content, game.GraphicsDevice));
-                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(-2, 7), 180+30, game.Content, game.GraphicsDevice));
-                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(2, 7), 180-35, game.Content, game.GraphicsDevice));
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(0, 8), 180, game.Content, game.GraphicsDevice));
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(-2, 8), 180+30, game.Content, game.GraphicsDevice));
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(2, 8), 180-35, game.Content, game.GraphicsDevice));
                     hasShot = true;
                 }
 
