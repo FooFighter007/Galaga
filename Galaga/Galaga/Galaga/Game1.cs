@@ -38,6 +38,8 @@ namespace Galaga
         public int diveFreq;
         public int diveChance;
 
+        int level;
+
         int chance;
 
         Boolean menuChangeOnFrame;
@@ -76,6 +78,11 @@ namespace Galaga
             timer = 0;
             spawnTimer = 0;
             diveTimer = 0;
+            level = 1;
+            maxEnemiesPerRound = 13;
+            maxSpeed = 5;
+            diveFreq = 120;
+            diveChance = 3;
 
             base.Initialize();
         }
@@ -134,17 +141,20 @@ namespace Galaga
                 {
                     currentMenu = 1;
                     menuChangeOnFrame = true;
-
-                    //Difficulty Changes
-                    maxEnemiesPerRound = 14;
-                    maxSpeed = 5;
-                    diveFreq = 90;
-                    diveChance = 2; 
                 }
             }
 
             if(currentMenu == 1)
             {
+
+                if (em.enemies.Count == 0 && em.hasReleased == true)
+                {
+                    level++;
+                    em.StartNewRound();
+                    bullets.Clear();
+                    Console.WriteLine("Test");
+                }
+
                 if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false)
                 {
                     bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
@@ -213,17 +223,17 @@ namespace Galaga
                 }
 
                 //Random Enemies Entering
-                if(spawnTimer == 180)
+                if(spawnTimer == 180 / level)
                 {
                     chance = rand.Next(0,2);
                     if(chance == 0)
-                        em.RandomAddEnemy(maxEnemiesPerRound, maxSpeed);
+                        em.RandomAddEnemy(maxEnemiesPerRound + (level * 2), maxSpeed + level);
                     spawnTimer = 0;
                 }
 
-                if (diveTimer == diveFreq)
+                if (diveTimer == (diveFreq / level))
                 {
-                    if (rand.Next(0, diveChance + 1) == 0)
+                    if (rand.Next(0, (diveChance + 1)) == 0)
                     {
                         em.RandomDive();
                     }
@@ -242,7 +252,9 @@ namespace Galaga
             {
                 player.newGame();
                 em.StartNewRound();
+                bullets.Clear();
                 currentMenu = 0;
+                level = 1;
             }
 
             if (starBackgroundObject.starBackgroundDisplayed == true)

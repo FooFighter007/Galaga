@@ -24,6 +24,7 @@ namespace Galaga
 
         Path activePath;
         bool isAdding;
+        public bool hasReleased;
 
         //Temporary Enemy
         Enemy tempenem;
@@ -36,6 +37,7 @@ namespace Galaga
         //Adding Enemies
         double timer = 0;
         int x;
+        int maximum;
 
         //Paths
         public Path leftZig = new Path();
@@ -45,6 +47,7 @@ namespace Galaga
         int randomPath = 0;
         int enemyAmount = 0;
         int randomSpeed = 0;
+        int enemiesReleased;
 
         //Lists of Slots and Enemies
         private Rectangle[] spots = new Rectangle[27];
@@ -139,13 +142,17 @@ namespace Galaga
         //Adds Enemies at a random speed, amount and path
         public void RandomAddEnemy(int max, int speed)
         {
+            maximum = max;
+
             randomPath = rand.Next(0, 4);
+            if (hasReleased == true)
+                return;
             if (enemies.Count == max)
                 return;
             do
             {
                 enemyAmount = rand.Next(1, 9);
-            } while (enemyAmount > 27 - enemies.Count || (enemies.Count + enemyAmount) > max);
+            } while (enemyAmount > 27 - enemies.Count || (enemiesReleased + enemyAmount) > max);
             randomSpeed = rand.Next(3, speed + 1);
 
             if (randomPath == 0)
@@ -237,6 +244,8 @@ namespace Galaga
         public void StartNewRound()
         {
             enemies.Clear();
+            enemiesReleased = 0;
+            hasReleased = false;
         }
 
 
@@ -277,6 +286,11 @@ namespace Galaga
 
                     if (timer == 20)
                     {
+                        enemiesReleased++;
+                        if (enemiesReleased == maximum)
+                        {
+                            hasReleased = true;
+                        }
                         addEnemy(activePath, randomSpeed);
                         timer = 0;
                         x++;
