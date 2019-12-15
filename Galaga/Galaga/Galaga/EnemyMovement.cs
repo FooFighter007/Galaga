@@ -17,10 +17,11 @@ namespace Galaga
         Game1 game;
 
         //Textures
-        public Texture2D enemy1;
-        public Texture2D enemy2;
-
-        Texture2D current;
+        public Texture2D enemy1a;
+        public Texture2D enemy1b;
+        public Texture2D enemy2a;
+        public Texture2D enemy2b;
+        public Texture2D damage;
 
         Path activePath;
         bool isAdding;
@@ -28,7 +29,6 @@ namespace Galaga
 
         //Temporary Enemy
         Enemy tempenem;
-        Enemy tempDive;
 
         //Global Offset
         public int offset = 0;
@@ -153,7 +153,7 @@ namespace Galaga
             {
                 enemyAmount = rand.Next(1, 9);
             } while (enemyAmount > 27 - enemies.Count || (enemiesReleased + enemyAmount) > max);
-            randomSpeed = rand.Next(3, speed + 1);
+            randomSpeed = rand.Next(4, speed + 1);
 
             if (randomPath == 0)
             {
@@ -246,6 +246,10 @@ namespace Galaga
             enemies.Clear();
             enemiesReleased = 0;
             hasReleased = false;
+            for (int i = 0; i <= 26; i++)
+            {
+                spotIndex[i] = 0;
+            }
         }
 
 
@@ -253,8 +257,8 @@ namespace Galaga
         public void addEnemy(Path ap, int s)
         {
             tempenem = new Enemy(game);
-            tempenem.EnemyEnter(s, ap);
             tempenem.em = this;
+            tempenem.EnemyEnter(s, ap);
             enemies.Add(tempenem);
         }
 
@@ -268,12 +272,10 @@ namespace Galaga
             if (offset < -20)
             {
                 direction = 1;
-                current = enemy1;
             }
             if (offset > 20)
             {
                 direction = -1;
-                current = enemy2;
             }
 
             for (int i = 0; i < enemies.Count; i++)
@@ -308,7 +310,7 @@ namespace Galaga
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                sb.Draw(current, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
+                sb.Draw(enemies[i].state, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
             }
         }
 

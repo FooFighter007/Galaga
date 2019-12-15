@@ -24,10 +24,12 @@ namespace Galaga
         Rectangle choosen;
         Rectangle diveRect;
         Game1 game;
+        public Texture2D state;
 
         //timer
         double timer;
         double deathTime;
+        double animTimer;
 
         //Condition Bools
         bool isDiving;
@@ -48,7 +50,14 @@ namespace Galaga
         int slotId;
         int dir;
         int randShoot;
-        int health;
+
+        //Enemy Textures
+        Texture2D enemy1a;
+        Texture2D enemy1b;
+        Texture2D enemy2a;
+        Texture2D enemy2b;
+        Texture2D damage;
+        int enemyType;
 
         //Construtor
         public Enemy(Game1 g)
@@ -60,15 +69,15 @@ namespace Galaga
             inFormation = false;
             enteringForm = false;
             hasShot = false;
-
+            enemyType = rand.Next(0,2);
             game = g;
 
-            health = 1;
         }
 
         //Called to Move enemy into game
         public void EnemyEnter(int s, Path ap)
         {
+            animTimer = 0;
             activePath = ap;
             speed = s;
             enemyPos = new Rectangle((int)activePath.pathPoints[0].X, (int)activePath.pathPoints[0].Y, 40, 40);
@@ -76,13 +85,21 @@ namespace Galaga
             y1 = enemyPos.Y;
             step = 0;
             isEntering = true;
+            enemy1a = em.enemy1a;
+            enemy1b = em.enemy1b;
+            enemy2a = em.enemy2a;
+            enemy2b = em.enemy2b;
+            damage = em.damage;
+            if (enemyType == 0)
+                state = enemy1a;
+            else
+                state = enemy2a;           
         }
 
         //Called When Hit
         public void Hit()
         {
             deathTime = 0;
-            hit = Color.Red;
             isHit = true;
         }
 
@@ -211,6 +228,7 @@ namespace Galaga
             //Deletes The Object After Time
             if (isHit == true)
             {
+                state = damage;
                 inFormation = false;
                 enteringForm = false;
                 isDiving = false;
@@ -223,7 +241,24 @@ namespace Galaga
 
                 deathTime++;
             }
-            
+
+            if (animTimer / 20 == 1 && isHit == false)
+            {
+                if (enemyType == 0)
+                    state = enemy1b;
+                else
+                    state = enemy2b;
+            }
+            if (animTimer == 40 && isHit == false) 
+            {
+                if (enemyType == 0)
+                    state = enemy1a;
+                else
+                    state = enemy2a;
+                animTimer = 0;
+            }
+
+            animTimer++;
         }
 
 

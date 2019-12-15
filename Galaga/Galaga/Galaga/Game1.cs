@@ -38,7 +38,7 @@ namespace Galaga
         public int diveFreq;
         public int diveChance;
 
-        int level;
+        public int level;
 
         int chance;
 
@@ -81,7 +81,7 @@ namespace Galaga
             level = 1;
             maxEnemiesPerRound = 13;
             maxSpeed = 5;
-            diveFreq = 120;
+            diveFreq = 100;
             diveChance = 3;
 
             base.Initialize();
@@ -104,8 +104,11 @@ namespace Galaga
             GAMEOVER = new GameOverScreen(this, spriteBatch);
             gOverlay = new GameOverlay(this, spriteBatch, ref player);
             gOverlay.LoadContent(Content);
-            em.enemy1 = Content.Load<Texture2D>("GalagaEnemy1");
-            em.enemy2 = Content.Load<Texture2D>("GalagaEnemy2");
+            em.enemy1a = Content.Load<Texture2D>("GalagaEnemy1");
+            em.enemy1b = Content.Load<Texture2D>("GalagaEnemy2");
+            em.enemy2a = Content.Load<Texture2D>("GalagaEnemy3");
+            em.enemy2b = Content.Load<Texture2D>("GalagaEnemy4");
+            em.damage = Content.Load<Texture2D>("GalagaEnemyDamage");
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
         }
@@ -152,7 +155,6 @@ namespace Galaga
                     level++;
                     em.StartNewRound();
                     bullets.Clear();
-                    Console.WriteLine("Test");
                 }
 
                 if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false)
@@ -223,15 +225,22 @@ namespace Galaga
                 }
 
                 //Random Enemies Entering
-                if(spawnTimer == 180 / level)
+                if(spawnTimer >= 180 / level)
                 {
                     chance = rand.Next(0,2);
-                    if(chance == 0)
-                        em.RandomAddEnemy(maxEnemiesPerRound + (level * 2), maxSpeed + level);
+                    if (chance == 0)
+                    {
+                        if (maxEnemiesPerRound + (level * 2) >= 27)
+                        {
+                            em.RandomAddEnemy(27, maxSpeed + level);
+                        }
+                        else  
+                            em.RandomAddEnemy(maxEnemiesPerRound + (level * 2), maxSpeed + level);
+                    }
                     spawnTimer = 0;
                 }
 
-                if (diveTimer == (diveFreq / level))
+                if (diveTimer >= (diveFreq / level))
                 {
                     if (rand.Next(0, (diveChance + 1)) == 0)
                     {

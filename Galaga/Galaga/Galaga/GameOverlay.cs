@@ -81,6 +81,7 @@ namespace Galaga
             sb.DrawString(large, "" + player.score, positions[1], Color.White);
             sb.DrawString(large, "HIGHSCORE", positions[2], Color.Red);
             sb.DrawString(large, "" + player.highScore, positions[3], Color.White);
+            sb.DrawString(large, "LEVEL:  " + game.level.ToString(), new Vector2(440, 680), Color.White);
         }
     }
 }
