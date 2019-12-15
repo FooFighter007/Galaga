@@ -167,6 +167,7 @@ namespace Galaga
                                 em.enemies[f].Hit();
                                 bullets.Remove(bullets[i]);
                                 player.hits++;
+                                player.addScore(100);
                                 break;
                             }
                         }

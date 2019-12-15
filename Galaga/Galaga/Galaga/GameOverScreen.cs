@@ -29,12 +29,6 @@ namespace Galaga
             LoadContent();
         }
 
-        public void Initialize()
-        {
-            
-        }
-
-
         public void LoadContent()
         {
             GameFont = game.Content.Load<SpriteFont>("ClassicLarge");
