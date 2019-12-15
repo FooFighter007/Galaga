@@ -240,6 +240,7 @@ namespace Galaga
             else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
             {
                 player.newGame();
+                em.StartNewRound();
                 currentMenu = 0;
             }
 

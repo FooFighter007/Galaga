@@ -234,6 +234,11 @@ namespace Galaga
         }
 
 
+        public void StartNewRound()
+        {
+            enemies.Clear();
+        }
+
 
         //Adds New Enemy
         public void addEnemy(Path ap, int s)
