@@ -175,7 +175,7 @@ namespace Galaga
                     {
                         for (int f = 0; f < em.enemies.Count; f++)
                         {
-                            Enemy e = em.enemies[i];
+                            Enemy e = em.enemies[f];
                             if (bullets[i].IntersectingRectangle(e.enemyPos) && !e.isHit)
                             {
                                 e.Hit();
