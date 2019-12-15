@@ -101,7 +101,7 @@ namespace Galaga
             if (dir == 2)
                 diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 760, speed, speed);
             timer = 0;
-            randShoot = rand.Next(30, 91);
+            randShoot = rand.Next(30, 31);
         }
 
         //Main Enemy Update Method
@@ -187,7 +187,9 @@ namespace Galaga
                 //!!FOR CIARAN!!
                 if (timer == randShoot && hasShot == false)
                 {
-                    Console.WriteLine("Test");
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(0, 7), 180, game.Content, game.GraphicsDevice));
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(-2, 7), 180+30, game.Content, game.GraphicsDevice));
+                    game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(2, 7), 180-35, game.Content, game.GraphicsDevice));
                     hasShot = true;
                 }
 
