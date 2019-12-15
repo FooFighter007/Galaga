@@ -27,6 +27,7 @@ namespace Galaga
 
         //timer
         double timer;
+        double deathTime;
 
         //Condition Bools
         bool isDiving;
@@ -101,7 +102,7 @@ namespace Galaga
             if (dir == 2)
                 diveRect = new Rectangle((enemyPos.X - 100) - speed / 2, 760, speed, speed);
             timer = 0;
-            randShoot = rand.Next(30, 31);
+            randShoot = rand.Next(15, 46);
         }
 
         //Main Enemy Update Method
