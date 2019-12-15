@@ -24,7 +24,7 @@ namespace Galaga
 
         Random rand = new Random();
 
-        List<Projectile> bullets;
+        public List<Projectile> bullets;
         KeyboardState kbOld;
 
         StarBackground starBackgroundObject;

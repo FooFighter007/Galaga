@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Galaga
 {
-    class Projectile
+    public class Projectile
     {
 
         private int missileType;        //1 is Player, 2 is Alien.
