@@ -166,28 +166,30 @@ namespace Galaga
 
                 for (int i = bullets.Count - 1; i >= 0; i--)
                 {
-                    bullets[i].UpdatePos();
-                    if (!bullets[i].OnScreen())
-                        bullets.Remove(bullets[i]);
+                    Projectile b = bullets[i];
+                    b.UpdatePos();
+                    if (!b.OnScreen())
+                        bullets.Remove(b);
 
-                    if (bullets[i].missileType == 1)
+                    if (b.missileType == 1)
                     {
                         for (int f = 0; f < em.enemies.Count; f++)
                         {
-                            if (bullets[i].IntersectingRectangle(em.enemies[f].enemyPos) && !em.enemies[f].isHit)
+                            Enemy e = em.enemies[i];
+                            if (bullets[i].IntersectingRectangle(e.enemyPos) && !e.isHit)
                             {
-                                em.enemies[f].Hit();
-                                bullets.Remove(bullets[i]);
+                                e.Hit();
+                                bullets.Remove(b);
                                 player.hits++;
                                 player.addScore(100);
                                 break;
                             }
                         }
                     }
-                    else if (bullets[i].IntersectingRectangle(player.getRectangle()))
+                    else if (b.IntersectingRectangle(player.getRectangle()))
                     {
                         player.Hit();
-                        bullets.Remove(bullets[i]);
+                        bullets.Remove(b);
                         break;
                     }
                 }
