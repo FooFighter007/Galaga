@@ -81,13 +81,9 @@ namespace Galaga
         //Called When Hit
         public void Hit()
         {
+            deathTime = 0;
             hit = Color.Red;
-            health--;
-
-            if (health == 0)
-            {
-                em.enemies.Remove(this);
-            }
+            isHit = true;
         }
 
         public void Dive()
@@ -211,6 +207,18 @@ namespace Galaga
             {
                 enemyPos.X = choosen.X + em.offset;
             }
+
+            //Deletes The Object After Time
+            if (isHit == true)
+            {
+                if (deathTime == 60)
+                {
+                    em.enemies.Remove(this);
+                }
+
+                deathTime++;
+            }
+            
         }
 
 
