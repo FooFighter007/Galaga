@@ -15,23 +15,17 @@ namespace Galaga
     class GameOverScreen
     {
         SpriteBatch spriteBatch;
-        GraphicsDevice device;
-        ContentManager Content;
-        private int shots;
-        private int hits;
         SpriteFont GameFont;
+        Game1 game;
 
         public GameOverScreen()
         {
         }
         
-        public GameOverScreen(SpriteBatch temporarySpriteBatch, GraphicsDevice temporaryDevice, ContentManager temporaryContent, int s, int h)
+        public GameOverScreen(Game1 g, SpriteBatch temporarySpriteBatch)
         {
             spriteBatch = temporarySpriteBatch;
-            device = temporaryDevice;
-            Content = temporaryContent;
-            shots = s;
-            hits = h;
+            game = g;
             LoadContent();
         }
 
@@ -43,16 +37,16 @@ namespace Galaga
 
         public void LoadContent()
         {
-            GameFont = Content.Load<SpriteFont>("ClassicLarge");
+            GameFont = game.Content.Load<SpriteFont>("ClassicLarge");
         }
 
        public void Draw()
         {
             spriteBatch.DrawString(GameFont,"---RESULTS---",new Vector2(200,280),Color.Red);
-            spriteBatch.DrawString(GameFont, "SHOTS  FIRED:  " + shots + "\nNUMBER  OF  HITS:  " + hits, new Vector2(170, 320), Color.Yellow);
+            spriteBatch.DrawString(GameFont, "SHOTS  FIRED:  " + game.player.shots + "\nNUMBER  OF  HITS:  " + game.player.hits, new Vector2(170, 320), Color.Yellow);
             double ratio = 0;
-            if (hits > 0)
-                ratio = (double) shots / hits;
+            if (game.player.shots > 0)
+                ratio = Math.Round((double) game.player.hits / game.player.shots * 100, 2);
             spriteBatch.DrawString(GameFont, "HIT  MISS  RATIO:  " + ratio + "%", new Vector2(170, 380), Color.White);
             spriteBatch.DrawString(GameFont, "PRESS  SPACE  TO  RESTART", new Vector2(140, 680), Color.White);
         }

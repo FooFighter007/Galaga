@@ -20,7 +20,7 @@ namespace Galaga
         SpriteBatch spriteBatch;
 
         Texture2D ship;
-        Player player;
+        public Player player;
 
         Random rand = new Random();
 
@@ -94,7 +94,7 @@ namespace Galaga
             starBackgroundObject.Initialize();
             starBackgroundObject.LoadContent();
             mainMenuObject = new MainMenu(spriteBatch, GraphicsDevice, Content);
-            GAMEOVER = new GameOverScreen(spriteBatch, GraphicsDevice, Content, player.shots, player.hits);
+            GAMEOVER = new GameOverScreen(this, spriteBatch);
             gOverlay = new GameOverlay(this, spriteBatch, ref player);
             gOverlay.LoadContent(Content);
             em.enemy1 = Content.Load<Texture2D>("GalagaEnemy1");
@@ -149,6 +149,7 @@ namespace Galaga
                 {
                     bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
                     player.bullets -= 1;
+                    player.shots++;
                 }
 
                 for (int i = bullets.Count - 1; i >= 0; i--)
@@ -156,6 +157,30 @@ namespace Galaga
                     bullets[i].UpdatePos();
                     if (!bullets[i].OnScreen())
                         bullets.Remove(bullets[i]);
+
+                    if (bullets[i].missileType == 1)
+                    {
+                        for (int f = 0; f < em.enemies.Count; f++)
+                        {
+                            if (bullets[i].IntersectingRectangle(em.enemies[f].enemyPos) && !em.enemies[f].isHit)
+                            {
+                                em.enemies[f].Hit();
+                                bullets.Remove(bullets[i]);
+                                player.hits++;
+                                break;
+                            }
+                        }
+                    }
+                    else if (bullets[i].IntersectingRectangle(player.getRectangle()))
+                    {
+                        player.lives--;
+                        bullets.Remove(bullets[i]);
+                        if (player.lives == 0)
+                        {
+                            currentMenu = 2;
+                        }
+                        break;
+                    }
                 }
 
                 if (timer == 30)
@@ -164,7 +189,6 @@ namespace Galaga
                     {
                         player.bullets++;
                     }
-                    player.addScore(25);
                     timer = 0;
                 }
 
@@ -186,11 +210,6 @@ namespace Galaga
                 {
                     player.moveLeft();
                 }
-                if (kb.IsKeyDown(Keys.U))
-                {
-                    currentMenu = 2;
-                }
-
 
                 //Random Enemies Entering
                 if(spawnTimer == 180)
@@ -217,8 +236,10 @@ namespace Galaga
                 em.update();
 
 
-            } else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
+            }
+            else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
             {
+                player.newGame();
                 currentMenu = 0;
             }
 

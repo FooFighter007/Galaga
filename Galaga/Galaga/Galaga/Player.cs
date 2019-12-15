@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Galaga
 {
-    class Player
+    public class Player
     {
         //580 width 720 height
         //player 50x50

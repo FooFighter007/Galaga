@@ -15,7 +15,7 @@ namespace Galaga
     public class Projectile
     {
 
-        private int missileType;        //1 is Player, 2 is Alien.
+        public int missileType;        //1 is Player, -1 is Alien.
         private Texture2D missile;
         private Rectangle rec;
         private int rotation;
@@ -23,7 +23,6 @@ namespace Galaga
         private Vector2 positionVector;
         private GraphicsDevice device;
         private ContentManager Content;
-
 
         public Projectile(Rectangle shooter, int type, Vector2 temporaryVel, int rot, ContentManager tempContent, GraphicsDevice temporaryDevice)
         {

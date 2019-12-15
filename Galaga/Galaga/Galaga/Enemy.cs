@@ -31,7 +31,7 @@ namespace Galaga
 
         //Condition Bools
         bool isDiving;
-        bool isHit;
+        public bool isHit;
         bool isEntering;
         public bool inFormation;
         bool enteringForm;
@@ -211,7 +211,12 @@ namespace Galaga
             //Deletes The Object After Time
             if (isHit == true)
             {
-                if (deathTime == 60)
+                inFormation = false;
+                enteringForm = false;
+                isDiving = false;
+                isEntering = false;
+
+                if (deathTime == 15)
                 {
                     em.enemies.Remove(this);
                 }
