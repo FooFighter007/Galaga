@@ -67,21 +67,26 @@ namespace Galaga
 
         public void Render()
         {
-            for (int i = 0; i < player.lives - 1; i++)
-            {
-                sb.Draw(ship, lives[i], Color.White);
-            }
-
-            for (int i = 0; i < player.bullets; i++)
-            {
-                sb.Draw(b, bullets[i], Color.White);
-            }
 
             sb.DrawString(large, "SCORE", positions[0], Color.Red);
             sb.DrawString(large, "" + player.score, positions[1], Color.White);
             sb.DrawString(large, "HIGHSCORE", positions[2], Color.Red);
             sb.DrawString(large, "" + player.highScore, positions[3], Color.White);
-            sb.DrawString(large, "LEVEL:  " + game.level.ToString(), new Vector2(440, 680), Color.White);
+
+            if (game.currentMenu == 1)
+            {
+                for (int i = 0; i < player.lives - 1; i++)
+                {
+                    sb.Draw(ship, lives[i], Color.White);
+                }
+
+                for (int i = 0; i < player.bullets; i++)
+                {
+                    sb.Draw(b, bullets[i], Color.White);
+                }
+
+                sb.DrawString(large, "LEVEL:  " + game.level.ToString(), new Vector2(440, 680), Color.White);
+            }
         }
     }
 }

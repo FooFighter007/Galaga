@@ -310,7 +310,10 @@ namespace Galaga
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                sb.Draw(enemies[i].state, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
+                if (!enemies[i].isHit)
+                    sb.Draw(enemies[i].state, enemies[i].enemyPos, null, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
+                else
+                    sb.Draw(enemies[i].state, enemies[i].enemyPos, enemies[i].src, enemies[i].hit, enemies[i].rotate, new Vector2(15 / 2, 15 / 2), SpriteEffects.None, 0);
             }
         }
 

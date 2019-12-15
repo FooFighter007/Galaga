@@ -70,7 +70,7 @@ namespace Galaga
         {
             // TODO: Add your initialization logic here
             em = new EnemyMovement(this);
-            player = new Player();
+            player = new Player(this);
             bullets = new List<Projectile>();
             kbOld = Keyboard.GetState();
             currentMenu = 0;
@@ -108,7 +108,7 @@ namespace Galaga
             em.enemy1b = Content.Load<Texture2D>("GalagaEnemy2");
             em.enemy2a = Content.Load<Texture2D>("GalagaEnemy3");
             em.enemy2b = Content.Load<Texture2D>("GalagaEnemy4");
-            em.damage = Content.Load<Texture2D>("GalagaEnemyDamage");
+            em.damage = Content.Load<Texture2D>("explosion");
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
         }
@@ -186,13 +186,19 @@ namespace Galaga
                     }
                     else if (bullets[i].IntersectingRectangle(player.getRectangle()))
                     {
-                        player.lives--;
+                        player.Hit();
                         bullets.Remove(bullets[i]);
-                        if (player.lives == 0)
-                        {
-                            currentMenu = 2;
-                        }
                         break;
+                    }
+                }
+
+                for (int i = em.enemies.Count - 1; i >= 0; i--)
+                {
+                    Enemy e = em.enemies[i];
+                    if (e.enemyPos.Intersects(player.getRectangle()) && e.isDiving)
+                    {
+                        player.Hit();
+                        em.enemies[i].Hit();
                     }
                 }
 

@@ -16,6 +16,7 @@ namespace Galaga
     {
         //Objects
         public Rectangle enemyPos;
+        public Rectangle src;
         public Color hit;
         Path activePath;
         public EnemyMovement em;
@@ -32,7 +33,7 @@ namespace Galaga
         double animTimer;
 
         //Condition Bools
-        bool isDiving;
+        public bool isDiving;
         public bool isHit;
         bool isEntering;
         public bool inFormation;
@@ -62,6 +63,7 @@ namespace Galaga
         //Construtor
         public Enemy(Game1 g)
         {
+            src = new Rectangle(0, 0,40,40);
             hit = Color.White;
             isDiving = false;
             isHit = false;
@@ -238,6 +240,8 @@ namespace Galaga
                 {
                     em.enemies.Remove(this);
                 }
+
+                src.X = ((int)deathTime / 5) * 40;
 
                 deathTime++;
             }

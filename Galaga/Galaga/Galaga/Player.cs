@@ -24,14 +24,25 @@ namespace Galaga
         public int highScore;
         public int shots;
         public int hits;
+        Game1 game;
 
-        public Player()
+        public Player(Game1 g)
         {
             player = new Rectangle(265, 595, 50, 50);
             lives = 3;
             bullets = 2;
             score = 0;
             highScore = 0;
+            game = g;
+        }
+
+        public void Hit()
+        {
+            lives--;
+            if (lives == 0)
+            {
+                game.currentMenu = 2;
+            }
         }
 
         public Rectangle getRectangle()
