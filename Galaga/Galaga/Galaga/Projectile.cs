@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Galaga
 {
-    class Projectile
+    public class Projectile
     {
 
         private int missileType;        //1 is Player, 2 is Alien.
@@ -25,16 +25,16 @@ namespace Galaga
         private ContentManager Content;
 
 
-        public Projectile(Rectangle shooter, int type, Vector2 temporaryVel, int rot, GraphicsDevice tempDevice, ContentManager tempContent)
+        public Projectile(Rectangle shooter, int type, Vector2 temporaryVel, int rot, ContentManager tempContent, GraphicsDevice temporaryDevice)
         {
             missileType = type;
             velocityVector = temporaryVel;
-            device = tempDevice;
             Content = tempContent;
             rec = new Rectangle(shooter.Center.X, shooter.Top - (type * 5), 10,30);
             positionVector.X = rec.X;
             positionVector.Y = rec.Y;
             rotation = rot;
+            device = temporaryDevice;
             LoadContent();
         }
 

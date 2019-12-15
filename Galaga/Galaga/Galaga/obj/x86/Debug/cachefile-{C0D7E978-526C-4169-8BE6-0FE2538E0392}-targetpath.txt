@@ -1,0 +1,12 @@
+Content\eMissile.xnb
+Content\pMissile.xnb
+Content\pShip.xnb
+Content\White Circle.xnb
+Content\White.xnb
+Content\GalagaLogo.xnb
+Content\copyright-128.xnb
+Content\GalagaEnemy1.xnb
+Content\GalagaEnemy2.xnb
+Content\ArialBigSpriteFont.xnb
+Content\ArialSmallSpriteFont.xnb
+Content\ClassicLarge.xnb

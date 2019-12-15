@@ -24,7 +24,7 @@ namespace Galaga
 
         Random rand = new Random();
 
-        List<Projectile> bullets;
+        public List<Projectile> bullets;
         KeyboardState kbOld;
 
         StarBackground starBackgroundObject;
@@ -147,7 +147,7 @@ namespace Galaga
             {
                 if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false)
                 {
-                    bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, GraphicsDevice, Content));
+                    bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
                     player.bullets -= 1;
                 }
 
