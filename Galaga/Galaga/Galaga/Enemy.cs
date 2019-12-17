@@ -60,6 +60,11 @@ namespace Galaga
         Texture2D damage;
         int enemyType;
 
+        //Sound
+        SoundEffect fire;
+        SoundEffect dive;
+        SoundEffect kill;
+
         //Construtor
         public Enemy(Game1 g)
         {
@@ -92,6 +97,9 @@ namespace Galaga
             enemy2a = em.enemy2a;
             enemy2b = em.enemy2b;
             damage = em.damage;
+            kill = em.kill;
+            fire = em.firing;
+            dive = em.dive;
             if (enemyType == 0)
                 state = enemy1a;
             else
@@ -101,12 +109,14 @@ namespace Galaga
         //Called When Hit
         public void Hit()
         {
+            kill.Play();
             deathTime = 0;
             isHit = true;
         }
 
         public void Dive()
         {
+            dive.Play();
             dir = rand.Next(0,3);
             inFormation = false;
             isDiving = true;
@@ -203,6 +213,7 @@ namespace Galaga
                 //!!FOR CIARAN!!
                 if (timer == randShoot && hasShot == false)
                 {
+                    fire.Play();
                     game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(0, 8), 180, game.Content, game.GraphicsDevice));
                     game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(-2, 8), 180+30, game.Content, game.GraphicsDevice));
                     game.bullets.Add(new Projectile(enemyPos, -1, new Vector2(2, 8), 180-35, game.Content, game.GraphicsDevice));

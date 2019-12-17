@@ -40,6 +40,8 @@ namespace Galaga
         public int timePlaying;
         public Boolean firstFramePlaying;
 
+        public SoundEffect fire;
+
         public int level;
 
         public int hitTimer;
@@ -118,6 +120,10 @@ namespace Galaga
             em.enemy2a = Content.Load<Texture2D>("GalagaEnemy3");
             em.enemy2b = Content.Load<Texture2D>("GalagaEnemy4");
             em.damage = Content.Load<Texture2D>("explosion");
+            em.dive = Content.Load<SoundEffect>("dive");
+            em.firing = fire = Content.Load<SoundEffect>("firing");
+            em.kill = Content.Load<SoundEffect>("kill");
+
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
             startPlayingSoundEffect = Content.Load<SoundEffect>("Galaga First Level Start Sound Effect");
@@ -169,6 +175,7 @@ namespace Galaga
 
                 if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false && hitTimer == 0)
                 {
+                    fire.Play(); 
                     bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
                     player.bullets -= 1;
                     player.shots++;
