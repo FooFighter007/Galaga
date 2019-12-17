@@ -40,6 +40,8 @@ namespace Galaga
 
         public int level;
 
+        public int hitTimer;
+
         int chance;
 
         Boolean menuChangeOnFrame;
@@ -83,6 +85,7 @@ namespace Galaga
             maxSpeed = 5;
             diveFreq = 100;
             diveChance = 3;
+            hitTimer = 0;
 
             base.Initialize();
         }
@@ -157,7 +160,7 @@ namespace Galaga
                     bullets.Clear();
                 }
 
-                if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false)
+                if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false && hitTimer == 0)
                 {
                     bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
                     player.bullets -= 1;
@@ -186,22 +189,33 @@ namespace Galaga
                             }
                         }
                     }
-                    else if (b.IntersectingRectangle(player.getRectangle()))
+                    else if (b.IntersectingRectangle(player.getRectangle()) && hitTimer == 0)
                     {
                         player.Hit();
                         bullets.Remove(b);
+                        hitTimer++;//timer for invunerablility
                         break;
                     }
                 }
-
                 for (int i = em.enemies.Count - 1; i >= 0; i--)
                 {
                     Enemy e = em.enemies[i];
-                    if (e.enemyPos.Intersects(player.getRectangle()) && e.isDiving)
+                    if (e.enemyPos.Intersects(player.getRectangle()) && e.isDiving && hitTimer == 0)
                     {
                         player.Hit();
                         em.enemies[i].Hit();
+                        hitTimer++;//Timer for invunerablility
                     }
+                }
+
+                if (hitTimer > 0)
+                {
+                    hitTimer++;//checks Timer
+                }
+
+                if (hitTimer % 60 == 0)//Timer for invunerability
+                {
+                    hitTimer = 0;
                 }
 
                 if (timer == 30)
