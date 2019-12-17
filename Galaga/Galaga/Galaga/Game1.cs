@@ -37,8 +37,14 @@ namespace Galaga
         public int maxSpeed;
         public int diveFreq;
         public int diveChance;
+        public int timePlaying;
+        public Boolean firstFramePlaying;
+
+        public SoundEffect fire;
 
         public int level;
+
+        public int hitTimer;
 
         int chance;
 
@@ -50,6 +56,8 @@ namespace Galaga
         long timer;
         double spawnTimer;
         double diveTimer;
+
+        SoundEffect startPlayingSoundEffect;
 
         public Game1()
         {
@@ -83,6 +91,9 @@ namespace Galaga
             maxSpeed = 5;
             diveFreq = 100;
             diveChance = 3;
+            timePlaying = 0;
+            hitTimer = 0;
+            firstFramePlaying = true;
 
             base.Initialize();
         }
@@ -109,8 +120,13 @@ namespace Galaga
             em.enemy2a = Content.Load<Texture2D>("GalagaEnemy3");
             em.enemy2b = Content.Load<Texture2D>("GalagaEnemy4");
             em.damage = Content.Load<Texture2D>("explosion");
+            em.dive = Content.Load<SoundEffect>("dive");
+            em.firing = fire = Content.Load<SoundEffect>("firing");
+            em.kill = Content.Load<SoundEffect>("kill");
+
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
+            startPlayingSoundEffect = Content.Load<SoundEffect>("Galaga First Level Start Sound Effect");
         }
 
         /// <summary>
@@ -157,8 +173,9 @@ namespace Galaga
                     bullets.Clear();
                 }
 
-                if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false)
+                if (kb.IsKeyDown(Keys.Space) && kbOld.IsKeyUp(Keys.Space) && player.bullets > 0 && menuChangeOnFrame == false && hitTimer == 0)
                 {
+                    fire.Play(); 
                     bullets.Add(new Projectile(player.getRectangle(), 1, new Vector2(0, -12), 0, Content, GraphicsDevice));
                     player.bullets -= 1;
                     player.shots++;
@@ -186,10 +203,11 @@ namespace Galaga
                             }
                         }
                     }
-                    else if (b.IntersectingRectangle(player.getRectangle()))
+                    else if (b.IntersectingRectangle(player.getRectangle()) && hitTimer == 0)
                     {
                         player.Hit();
                         bullets.Remove(b);
+                        hitTimer++;//timer for invunerablility
                         break;
                     }
                 }
@@ -197,11 +215,22 @@ namespace Galaga
                 for (int i = em.enemies.Count - 1; i >= 0; i--)
                 {
                     Enemy e = em.enemies[i];
-                    if (e.enemyPos.Intersects(player.getRectangle()) && e.isDiving)
+                    if (e.enemyPos.Intersects(player.getRectangle()) && e.isDiving && hitTimer == 0)
                     {
                         player.Hit();
                         em.enemies[i].Hit();
+                        hitTimer++;//Timer for invunerablility
                     }
+                }
+
+                if (hitTimer > 0)
+                {
+                    hitTimer++;//checks Timer
+                }
+
+                if (hitTimer % 60 == 0)//Timer for invunerability
+                {
+                    hitTimer = 0;
                 }
 
                 if (timer == 30)
@@ -257,13 +286,18 @@ namespace Galaga
                     diveTimer = 0;
                 }
 
+                if(firstFramePlaying == true)
+                {
+                    startPlayingSoundEffect.Play();
+                }
+
                 //Updates Enemy Spawn Timer
                 spawnTimer++;
                 diveTimer++;
                 //Updates EnemyMovement
                 em.update();
 
-
+                firstFramePlaying = false;
             }
             else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
             {
@@ -284,6 +318,11 @@ namespace Galaga
                 timer++;
             else
                 timer = 0;
+
+            if(currentMenu != 1)
+            {
+                firstFramePlaying = true;
+            }
 
             base.Update(gameTime);
         }

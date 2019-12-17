@@ -23,6 +23,11 @@ namespace Galaga
         public Texture2D enemy2b;
         public Texture2D damage;
 
+        //Sounds
+        public SoundEffect dive;
+        public SoundEffect firing;
+        public SoundEffect kill;
+
         Path activePath;
         bool isAdding;
         public bool hasReleased;
