@@ -61,7 +61,7 @@ namespace Galaga
                     System.IO.File.Create("highscore.txt").Close();
                 }
 
-                if (score > highScore)
+                if (score >= highScore)
                 {
                     System.IO.StreamWriter sw = new System.IO.StreamWriter("highscore.txt");
                     sw.WriteLine(score + "");
