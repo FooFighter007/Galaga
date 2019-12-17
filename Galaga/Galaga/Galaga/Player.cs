@@ -32,7 +32,20 @@ namespace Galaga
             lives = 3;
             bullets = 2;
             score = 0;
-            highScore = 0;
+
+            if (!System.IO.File.Exists("highscore.txt"))
+            {
+                highScore = 0;
+            }
+            else
+            {
+                System.IO.StreamReader sr = new System.IO.StreamReader("highscore.txt");
+                int score = int.Parse(sr.ReadLine());
+                sr.Close();
+
+                highScore = score;
+            }
+
             game = g;
         }
 
@@ -42,6 +55,15 @@ namespace Galaga
             if (lives == 0)
             {
                 game.currentMenu = 2;
+
+                if (!System.IO.File.Exists("highscore.txt"))
+                {
+                    System.IO.File.Create("highscore.txt").Close();
+                }
+
+                System.IO.StreamWriter sw = new System.IO.StreamWriter("highscore.txt");
+                sw.WriteLine(score + "");
+                sw.Close();
             }
         }
 
