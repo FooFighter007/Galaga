@@ -80,6 +80,8 @@ namespace Galaga
             lives = 3;
             bullets = 2;
             score = 0;
+            shots = 0;
+            hits = 0;
         }
         
         public void addScore(int points)
