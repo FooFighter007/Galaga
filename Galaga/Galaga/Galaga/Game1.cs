@@ -37,6 +37,8 @@ namespace Galaga
         public int maxSpeed;
         public int diveFreq;
         public int diveChance;
+        public int timePlaying;
+        public Boolean firstFramePlaying;
 
         public int level;
 
@@ -52,6 +54,8 @@ namespace Galaga
         long timer;
         double spawnTimer;
         double diveTimer;
+
+        SoundEffect startPlayingSoundEffect;
 
         public Game1()
         {
@@ -85,7 +89,9 @@ namespace Galaga
             maxSpeed = 5;
             diveFreq = 100;
             diveChance = 3;
+            timePlaying = 0;
             hitTimer = 0;
+            firstFramePlaying = true;
 
             base.Initialize();
         }
@@ -114,6 +120,7 @@ namespace Galaga
             em.damage = Content.Load<Texture2D>("explosion");
             mainMenuObject.Initialize();
             mainMenuObject.LoadContent();
+            startPlayingSoundEffect = Content.Load<SoundEffect>("Galaga First Level Start Sound Effect");
         }
 
         /// <summary>
@@ -197,6 +204,7 @@ namespace Galaga
                         break;
                     }
                 }
+
                 for (int i = em.enemies.Count - 1; i >= 0; i--)
                 {
                     Enemy e = em.enemies[i];
@@ -271,13 +279,18 @@ namespace Galaga
                     diveTimer = 0;
                 }
 
+                if(firstFramePlaying == true)
+                {
+                    startPlayingSoundEffect.Play();
+                }
+
                 //Updates Enemy Spawn Timer
                 spawnTimer++;
                 diveTimer++;
                 //Updates EnemyMovement
                 em.update();
 
-
+                firstFramePlaying = false;
             }
             else if (currentMenu == 2 && kb.IsKeyDown(Keys.Space))
             {
@@ -298,6 +311,11 @@ namespace Galaga
                 timer++;
             else
                 timer = 0;
+
+            if(currentMenu != 1)
+            {
+                firstFramePlaying = true;
+            }
 
             base.Update(gameTime);
         }
